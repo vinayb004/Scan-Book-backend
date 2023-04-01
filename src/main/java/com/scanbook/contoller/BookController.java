@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/books")
@@ -22,14 +22,14 @@ public class BookController {
         Book newBook = bookService.addBook(book);
         return ResponseEntity.ok(newBook);
     }
-    @RequestMapping(value = "/book/{barcode}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteBook(@PathVariable int barcode){
-        bookService.deleteBook(barcode);
+    @RequestMapping(value = "/book/{isbn}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteBook(@PathVariable int isbn){
+        bookService.deleteBook(isbn);
         return ResponseEntity.noContent().build();
     }
-    @RequestMapping(value="/book/{barcode}", method = RequestMethod.GET)
-    public ResponseEntity<Book> getBook(@PathVariable int barcode){
-        Book infoBook = bookService.getBook(barcode);
+    @RequestMapping(value="/book/{isbn}", method = RequestMethod.GET)
+    public ResponseEntity<Book> getBook(@PathVariable int isbn){
+        Book infoBook = bookService.getBook(isbn);
         if(infoBook == null){
             System.out.println("Not found a book");
             return ResponseEntity.notFound().build();
@@ -48,9 +48,9 @@ public class BookController {
         return ResponseEntity.ok(books);
     }
 
-    @RequestMapping(value="/updateBook/{barcode}", method=RequestMethod.PUT)
-    public ResponseEntity<Book> updateBook(@PathVariable int barcode, @RequestBody Book book) {
-        Book updateBook = bookService.updateBook(barcode, book);
+    @RequestMapping(value="/updateBook/{isbn}", method=RequestMethod.PUT)
+    public ResponseEntity<Book> updateBook(@PathVariable int isbn, @RequestBody Book book) {
+        Book updateBook = bookService.updateBook(isbn, book);
         return ResponseEntity.ok(updateBook);
     }
 }

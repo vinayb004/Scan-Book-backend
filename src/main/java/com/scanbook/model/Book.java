@@ -14,8 +14,8 @@ import javax.persistence.*;
 @Getter
 public class Book {
     @Id
-    @Column(name="Barcode")
-    private int barcode;
+    @Column(name="Isbn")
+    private int isbn;
 
     @Column(name="Title")
     private String title;
@@ -28,6 +28,10 @@ public class Book {
 
     @Column(name="Completed")
     private boolean completed;
+
+    @Column(name="Notes")
+    private String notes;
+
 
 
 }
