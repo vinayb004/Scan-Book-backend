@@ -10,7 +10,14 @@ Before you can download and run the Spring Boot application, make sure you have 
 
 ## Download
 To download the Spring Boot application, follow these steps:
-1. [Include specific download instructions, such as downloading from a GitHub repository, or downloading a ZIP file from a website]
+1. Clone the repository from GitHub using the following command:
+```
+ git clone https://github.com/vinayb004/Scan-book-frontend.git
+```
+2. Alternatively, you can download the ZIP file of the repository from GitHub by navigating to the repository's main page, clicking on the "Code" button, and selecting "Download ZIP".
+3. Extract the downloaded ZIP file to a directory of your choice.
+
+Once downloaded, Edit the Application.properties file based on your database configuration.
 
 ## Run
 To run the Spring Boot application, follow these steps:
