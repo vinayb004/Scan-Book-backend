@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.util.Optional;
 
 
 @Service
@@ -19,27 +19,40 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    public void deleteBook(int isbn){
+    public void deleteBook(long isbn){
         bookRepository.deleteById(isbn);
     }
-    public Book getBook(int isbn){
+    public Book getBook(long isbn){
         return bookRepository.findByIsbn(isbn);
     }
     public List<Book> getBooks(){
         return (List<Book>) bookRepository.findAll();
     }
 
-    public Book updateBook(int isbn, Book bookDetails){
+    public Book updateBook(long isbn, Book bookDetails){
+
         Book book =bookRepository.findByIsbn(isbn);
-        book.setAuthor(bookDetails.getAuthor());
-        book.setTitle(bookDetails.getTitle());
-        book.setPages(bookDetails.getPages());
+        if ( !bookDetails.getAuthor().isEmpty()) {
+            book.setAuthor(bookDetails.getAuthor());
+        }
+        if (!bookDetails.getTitle().isEmpty()) {
+            book.setTitle(bookDetails.getTitle());
+        }
+        if (bookDetails.getPages() != 0 ) {
+            book.setPages(bookDetails.getPages());
+        }
+
         book.setCompleted(bookDetails.isCompleted());
-        book.setNotes(bookDetails.getNotes());
-//        String currentNotes = book.getNotes();
-//        String newNotes = currentNotes != null ? currentNotes+"&#13;&#10;"+bookDetails.getNotes(): bookDetails.getNotes();
-//        book.setNotes(newNotes);
+
+        if (!bookDetails.getNotes().isEmpty()) {
+            book.setNotes(bookDetails.getNotes());
+        }
 
         return bookRepository.save(book);
+    }
+
+    public boolean existsByIsbn(long isbn) {
+        Optional<Book> book = Optional.ofNullable(bookRepository.findByIsbn(isbn));
+        return book.isPresent();
     }
 }

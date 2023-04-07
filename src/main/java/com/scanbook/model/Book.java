@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Book {
     @Id
     @Column(name="Isbn")
-    private int isbn;
+    private long isbn;
 
     @Column(name="Title")
     private String title;
